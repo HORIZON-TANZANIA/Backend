@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from .models import *
 
-class RestraurantGetSerializer(serializers.ModelSerializer):
+class RestaurantGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = "__all__"
         depth = 2
 
 
-class RestraurantPostSerializer(serializers.ModelSerializer):
+class RestaurantPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Restaurant
         fields = [
@@ -49,7 +49,7 @@ class AwardPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Award
         fields = [
-            "restraurant",
+            "restaurant",
             "product",
             "points",
             "pic"
@@ -71,7 +71,6 @@ class AwardCountGetTopSerializer(serializers.ModelSerializer):
 
     @classmethod
     def get_last_5_records(cls):
-        # Retrieve the last 5 records based on the 'created_at' field
         return AwardsCount.objects.order_by('-created_at')[:5]
 
 
@@ -100,23 +99,6 @@ class CouponTransactionPostSerializer(serializers.ModelSerializer):
             "award",
             "point_used",
         ]
-        
-
-class UserRestraurantGetSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserRestraurant
-        fields = "__all__"
-        depth = 2
-
-
-class UserRestraurantPostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserRestraurant
-        fields = [
-            "user",
-            "restraurant",
-            "total_points",
-        ]
 
 
 class TransactionGetSerializer(serializers.ModelSerializer):
@@ -133,4 +115,19 @@ class TransactionPostSerializer(serializers.ModelSerializer):
             "user",
             "coupon",
             "points_made",
+        ]
+
+class OwnerRestaurantGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OwnerRestaurant
+        fields = "__all__"
+        depth = 2
+
+
+class OwnerRestaurantPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OwnerRestaurant
+        fields = [
+            "user",
+            "restaurant",
         ]
