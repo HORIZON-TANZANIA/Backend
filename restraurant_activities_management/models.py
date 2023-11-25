@@ -20,7 +20,7 @@ class Restaurant(models.Model):
 
 class Coupon(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    restraurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     start_amount = models.DecimalField(max_digits=10, decimal_places=2)
     end_amount = models.DecimalField(max_digits=10, decimal_places=2)
     coupon_no = models.CharField(max_length=20)
@@ -37,7 +37,7 @@ class Coupon(models.Model):
 
 class Award(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    restraurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     pic = models.ImageField(upload_to="uploads/", null=True, blank=True)
     product = models.CharField(max_length=200)
     points = models.IntegerField()
@@ -87,16 +87,14 @@ class CouponTransaction(models.Model):
         db_table = "coupon_transaction"
 
 
-class UserRestraurant(models.Model):
+class OwnerRestaurant(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    restraurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-    total_points = models.IntegerField()
-    total_lifetime_points = models.PositiveIntegerField(default=0)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.id}'
 
     class Meta:
-        db_table = "user_restraurant"
+        db_table = "owner_restaurant"
