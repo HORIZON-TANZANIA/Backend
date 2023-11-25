@@ -98,53 +98,6 @@ class AwardView(APIView):
         return Response(serialized.data)
 
 
-class GenerateRewards(APIView):
-
-    @staticmethod
-    def post(request):
-        data = request.data
-        awardcount = int(data.get('count'))
-
-        for num in range(0, awardcount):
-            award_data = {
-                "award": data.get('award'),
-                "award_code": random.randint(1001, 9998),
-                "code_used_state": False
-            }
-            serialized = AwardCountPostSerializer(data=award_data)
-            if serialized.is_valid():
-                serialized.save()
-        return Response({"save": True})
-
-    @staticmethod
-    def get(request):
-        querytype = request.GET.get("querytype")
-        award = request.GET.get("award")
-        award_id = request.GET.get("id")
-        user_id = request.GET.get("user")
-        print(award_id)
-        if querytype == "award":
-            queryset = AwardsCount.objects.filter(award=award)
-            serialized = AwardCountGetSerializer(instance=queryset, many=True)
-            return Response(serialized.data)
-        elif querytype == "use_award":
-            try:
-                user = User.objects.get(id=user_id)
-                award_wanted = AwardsCount.objects.get(id=award_id)
-                award_wanted.code_used_state = True
-                award_wanted.user = user
-                award_wanted.save()
-                return Response({"success": True, "award_code": award_wanted.award_code})
-            except AwardsCount.DoesNotExist:
-                return Response({"success": False, "award_code": "The award is not available or already used"})
-        elif querytype == "user_redeemed_rewards":
-            queryset = AwardsCount.objects.filter(user=user_id).order_by('-created_at')[:5]
-            serialized = AwardCountGetTopSerializer(instance=queryset, many=True)
-            return Response(serialized.data)
-        else:
-            return Response({"message": "Specify the querying type"})
-
-
 class CouponTransactionView(APIView):
 
     @staticmethod
