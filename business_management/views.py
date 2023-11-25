@@ -9,7 +9,7 @@ from .tokens import get_user_token
 from .models import User
 from rest_framework.generics import UpdateAPIView
 from restraurant_activities_management.models import Restaurant
-from restraurant_activities_management.serializer import UserRestraurantPostSerializer
+from restraurant_activities_management.serializer import OwnerRestaurantPostSerializer
 
 
 class RegisterUser(APIView):
@@ -37,7 +37,7 @@ class RegisterUser(APIView):
             all_rsts: QuerySet[Restaurant] = Restaurant.objects.all()
 
             for rst in all_rsts:
-                user_rt_serialized = UserRestraurantPostSerializer(data={
+                user_rt_serialized = OwnerRestaurantPostSerializer(data={
                     "user": user_added.id,
                     "restaurant": rst.id,
                 })
