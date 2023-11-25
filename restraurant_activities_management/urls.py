@@ -4,9 +4,9 @@ from .views import *
 app_name = 'restraurant_activities_management'
 
 urlpatterns = [
-    path('api/restaurant', RestaurantView.as_view()),
-    path('api/coupon', CouponView.as_view()),
-    path('api/awards', AwardView.as_view()),
-    path('api/owner-restaurant', OwnerRestaurantView.as_view()),
-    path('api/use_points', CouponTransactionView.as_view()),
+    path('restaurant/', RestaurantView.as_view()),
+    path('coupon/', CouponView.as_view()),
+    path('awards/', AwardView.as_view()),
+    path('owner-restaurant/', OwnerRestaurantView.as_view()),
+    path('transactions/', CouponTransactionView.as_view())
 ]

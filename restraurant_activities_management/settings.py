@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "restraurant_activities_management",
     "business_management", 
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -39,7 +40,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "restraurant_activities_management.urls"
+ROOT_URLCONF = "business_management.urls"
 
 TEMPLATES = [
     {
