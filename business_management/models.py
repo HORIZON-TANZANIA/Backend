@@ -7,11 +7,9 @@ import uuid
 # Create your models here.
 class User(AbstractUser):
     ADMIN = 1
-    CUSTOMER = 2
     VENDOR = 3
     ROLE_CHOICES = (
         (ADMIN, "System admin"),
-        (CUSTOMER, "restaurant customer"),
         (VENDOR, "vendor admin")
     )
     GENDER = (
@@ -25,14 +23,13 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     gender = models.CharField(choices=GENDER, null=True, blank=True, max_length=6)
     profile = models.ImageField(upload_to="uploads/", null=True, blank=True)
-    role = models.PositiveIntegerField(choices=ROLE_CHOICES, default=CUSTOMER)
+    role = models.PositiveIntegerField(choices=ROLE_CHOICES, default=VENDOR)
     created_at = models.DateTimeField(auto_now=True)
     phone_number = models.CharField(max_length=12, unique=True)
-    total_points_made = models.PositiveIntegerField(default=0)
-    total_lifetime_points = models.PositiveIntegerField(default=0)
 
-    USERNAME_FIELD = "phone_number"
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['fname', 'lname', 'username']
+    
     def __str__(self):
         return self.username
 
