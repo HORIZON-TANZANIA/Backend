@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "restraurant_activities_management"
+    "restraurant_activities_management",
+    "business_management", 
 ]
 
 MIDDLEWARE = [
