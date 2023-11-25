@@ -1,5 +1,5 @@
 from django.db import models
-from user_management.models import User
+from business_management.models import User
 import uuid
 
 
