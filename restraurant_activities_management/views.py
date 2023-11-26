@@ -2,11 +2,14 @@ from rest_framework.response import Response
 from .models import *
 from .serializer import *
 from rest_framework.views import APIView
-import random
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 
 
 class RestaurantView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def post(request):
@@ -43,6 +46,8 @@ class RestaurantView(APIView):
 
 
 class CouponView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated] 
 
     @staticmethod
     def post(request):
@@ -70,6 +75,8 @@ class CouponView(APIView):
 
 
 class AwardView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def post(request):
@@ -99,6 +106,8 @@ class AwardView(APIView):
 
 
 class CouponTransactionView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def post(request):
@@ -132,6 +141,8 @@ class CouponTransactionView(APIView):
 
 
 class OwnerRestaurantView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     @staticmethod
     def post(request):
