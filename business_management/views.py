@@ -1,6 +1,7 @@
 from django.db.models import QuerySet
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, ChangePasswordSerializer
@@ -79,6 +80,9 @@ class LoginView(APIView):
 
 
 class UserInformation(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
 
     @staticmethod
     def get(request, query_type):
@@ -99,6 +103,8 @@ class UserInformation(APIView):
 
 
 class ChangePasswordView(UpdateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
    
     serializer_class = ChangePasswordSerializer
     model = User
