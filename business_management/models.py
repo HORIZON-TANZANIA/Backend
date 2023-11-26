@@ -7,7 +7,7 @@ import uuid
 # Create your models here.
 class User(AbstractUser):
     ADMIN = 1
-    VENDOR = 3
+    VENDOR = 2
     ROLE_CHOICES = (
         (ADMIN, "System admin"),
         (VENDOR, "vendor admin")
